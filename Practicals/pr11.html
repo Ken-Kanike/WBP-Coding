@@ -1,0 +1,27 @@
+<!--Write a program to design a form using list box, combo box and Hidden field box. -->
+<html>
+<body>
+    <form action="pr11.php" method="post">
+        <!-- combo box -->
+        <label>Department:</label>
+        <select name="dept">
+            <option value="CO">CO</option>
+            <option value="AI">AI</option>
+            <option value="BD">BD</option>
+        </select><br><br>
+        
+        <!-- list box -->
+        <label>Subjects:</label>
+        <select name="subjects[]" multiple>
+            <option value="MAD">MAD</option>
+            <option value="PHP">PHP</option>
+            <option value="Python">Python</option>
+        </select><br><br>
+
+        <!-- hidden feild  -->
+        <input type="hidden" name="formkey" value="1234">
+
+        <input type="submit" name="submit" value="submit"/>
+    </form>
+</body>
+</html>

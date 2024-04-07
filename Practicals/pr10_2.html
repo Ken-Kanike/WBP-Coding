@@ -1,0 +1,62 @@
+<!-- Develop web page and do validation using control text box, radio button, check box and button. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h3{
+            text-align: center;
+            color: blueviolet;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        td.submit-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="pr10_2.php" method="post">
+        <table>
+            <tr>
+                <th colspan="2"><h3>Student Registration</h3></th>
+            </tr>
+            <tr>
+                <th>Name :</th>
+                <td><input name="name"/></td>
+            </tr>
+            <tr>
+                <th>Email :</th>
+                <td><input type="email" name="email"/></td>
+            </tr>
+            <tr>
+                <th>Comment :</th>
+                <td><textarea name="comment"></textarea></td>
+            </tr>
+            <tr>
+                <th>Gender :</th>
+                <td>
+                    <input type="radio" name="gender" value="male"/> Male<br>
+                    <input type="radio" name="gender" value="female"/> Female
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="submit-container">
+                    <input type="submit" name="submit" value="Submit"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

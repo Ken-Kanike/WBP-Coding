@@ -1,0 +1,72 @@
+<!-- Write a program to design a registration form using textbox, radio button, checkbox and 
+button. -->
+<html>
+    <head>
+        <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h3{
+            color: #0fc918  ;
+        }
+
+        input[type="text"]{
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="radio"], input[type="checkbox"]{
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color:  #0fc918;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #83cf87;
+        }
+        </style>
+    </head>
+<body>
+    <form action="pr10_1.php" method="post">
+        <h3>Student Registration</h3>
+        <input type="text" name="name" placeholder="Enter Name"/><br>
+        Gender : <br>
+        <input type="radio" name="gender" value="male"/>Male<br>
+        <input type="radio" name="gender" value="female"/>Female<br><br>
+        Hobbies : <br>
+        <input type="checkbox" name="hobby[]" value="cricket"/>Cricket<br>
+        <input type="checkbox" name="hobby[]" value="football"/>Football<br><br>
+        <input type="submit" name="register" value="register"/>
+    </form>
+</body>
+</html>
