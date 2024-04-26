@@ -9,5 +9,9 @@ if(isset($_POST['register']))
         echo $_POST['hobby'][$i]." ";
         $i++;
     }
+    //or
+    // foreach( $_POST['hobby'] as $hobby){
+    //     echo $hobby." ";
+    // }
 }
 ?>

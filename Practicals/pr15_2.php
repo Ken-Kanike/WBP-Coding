@@ -17,7 +17,7 @@ if (!$conn) {
 }
 
 // SQL query to insert single record into the employee table
-$sql = "INSERT INTO employee (ename, edept, esalary) VALUES ('John Doe', 'Engineering', 50000.00)";
+$sql = "INSERT INTO employee (ename, edept, esalary) VALUES ('Henry Kevil', 'Engineering', 70000.00)";
 
 if (mysqli_query($conn, $sql)) {
     echo "Data inserted successfully!";

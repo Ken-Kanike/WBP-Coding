@@ -4,6 +4,7 @@
     function createCookie($name, $value) {
         setcookie($name, $value, time() + 3600);//expires in 1 hour
         echo "<br>cookie created";
+        echo "<br>Name : ".$_COOKIE[$name];
     }
 
     // Function to modify a cookie

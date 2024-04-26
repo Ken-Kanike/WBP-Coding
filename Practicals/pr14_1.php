@@ -4,9 +4,9 @@
      $to = "receiver@gmail.com";
      $subject = "Test Email";
      $body = "This is a test email sent from PHP.";
-     $headers = "from :sender@example.com";
+     $header ="from:junaidshaikh7722@gmail.com";
 
-     if (mail($to, $subject, $body, $headers)) {
+     if (mail($to, $subject, $body,$header)) {
             echo "Email sent successfully to $to<br>";
         } else {
             echo "Failed to send email to $to<br>";

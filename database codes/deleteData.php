@@ -13,7 +13,7 @@ if (!$conn) {
 }
 
 // SQL query to delete data from the employee table
-$sql = "DELETE FROM employee WHERE ename = 'John Doe'";
+$sql = "DELETE FROM employee WHERE ename = 'Smith Shane'";
 
 if (mysqli_query($conn, $sql)) {
     echo "Data deleted successfully!";

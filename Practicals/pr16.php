@@ -18,7 +18,7 @@ if (!$conn) {
 }
 
 // SQL query to update data in the employee table
-$sql = "UPDATE TYCO2 SET name='Alice' WHERE rollno='1856'";
+$sql = "UPDATE TYCO2 SET name='Junaid' WHERE rollno='1856'";
 
 if (mysqli_query($conn, $sql)) {
     echo "Data updated successfully!";
@@ -29,5 +29,7 @@ if (mysqli_query($conn, $sql)) {
 // Close connection
 mysqli_close($conn);
 ?>
+
+//Note database student is not created yet , you need to create it
 
 
