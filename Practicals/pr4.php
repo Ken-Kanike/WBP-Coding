@@ -32,29 +32,30 @@
 <h3> Develop a program to using Multidimensional array.</h3>
 <?php
    echo "1st way... Indexed Array<br>";
-   $marks = array(
-    array("John", 80, 75, 85),
-    array("Alice", 90, 85, 88),
-    array("Bob", 70, 65, 72)
+   $class = array(
+    // student[0] , student[1] , student[2] ,student[3]
+    array("John", 80, 75, 85),  //class[0]
+    array("Alice", 90, 85, 88),  //class[1]
+    array("Bob", 70, 65, 72)   //class[2]
    );
 
     echo "Multidimensional array elements:<br>";
-    foreach ($marks as $student) {
+    foreach ($class as $student) {
         echo "Name: " . $student[0] . ", Marks: " . $student[1] . ", " . $student[2] . ", " . $student[3] . "<br>";
     }
 
     // do the above one
     echo "<br>2nd way...Associative Array<br>";
-    $marks2 =array(
+    $class2 =array(
         "John" => array("Physics" =>  80 , "Maths" => 75 , "Chemistry" => 85),
         "Alice" => array("Physics" => 90 , "Maths" => 85 , "Chemistry" => 88),
         "Bob" => array("Physics" => 70 , "Maths" => 65 , "Chemistry" => 72)
     );
 
     echo "Marks of Alice in Chemistry = ";
-    echo $marks2['Alice']['Chemistry'];
+    echo $class2['Alice']['Chemistry'];
 
-    foreach ($marks2 as $student => $subjects) {
+    foreach ($class2 as $student => $subjects) {
         echo "<br>Name: " . $student." [ ";
         foreach ($subjects as $subject => $mark) {
             echo $subject . " = " . $mark." ";
