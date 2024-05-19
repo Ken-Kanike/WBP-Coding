@@ -16,7 +16,7 @@
 <br><br>
 
 <h3> Write a program to demonstrate PHP maths function.</h3>
-<?php
+<?php //maths function
     echo "Square root of 16: " . sqrt(16) . "<br>";
     echo "Power of 4 with 2: " . pow(4, 2) . "<br>";
     echo "Absolute value of -10: " . abs(-10). "<br>";
