@@ -171,7 +171,10 @@
             $result = $_POST['n1'] / $_POST['n2'];
             echo "<h3>Quotient = ".$result."</h3>"; 
         }
-        
+        switch($_REQUEST['submit']){
+            case 'ADD' : echo $n1 +$n2; break; // <input type="submit" name="submit" value"add"/>
+            //......
+        }
     ?>
     <br><hr><br>
    </center>

@@ -22,6 +22,7 @@ List two database operations.
 1. mysqli_connect() 
 2. mysqli_close($conn)  
 3. mysqli_fetch_array() 
+mysqli_fetch_row()
 4.mysqli_fetch_assoc() 
 5.mysqli_num_rows($result)
 6.mysqli_affected_rows()  
@@ -80,7 +81,8 @@ $database = 'mydatabase';
 $conn = mysqli_connect($host, $username, $password, $database);
 
 
-mysqli_close($conn) - Closes the connection to the MySQL server. 
+mysqli_close($conn) - When the script ends, the connection with the database also closes. If you want to end the code manually, use 
+the mysqli_close function.
 Syntax: mysqli_close($conn) 
 Parameters: $conn (mysqli) - The MySQLi connection object. 
 Return type: void - No value is returned.

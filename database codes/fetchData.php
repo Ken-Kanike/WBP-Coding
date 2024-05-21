@@ -17,6 +17,12 @@ $sql = "SELECT * FROM employee";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
+
+    // echo "No of rows retreived :" ,mysqli_num_rows($result);
+    // echo "<br><br>Retreived Data as array : <br>";
+    // print_r(mysqli_fetch_assoc($result));
+
+    echo "<br><br>Retreived Data: <br>";
     // Output data of each row
     while($row = mysqli_fetch_assoc($result)) {
         echo "ID: " . $row["id"]. " - Name: " . $row["ename"]. " - Department: " . $row["edept"]. " - Salary: " . $row["esalary"]. "<br>";

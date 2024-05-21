@@ -2,7 +2,7 @@
 echo "<h3>Data from another srcipt in another file</h3><br>"; 
 ?>
 
-<?php  /*
+<?php  
 // array()   => creates array
 // $arr[] = "abc"  => adds element to next index
 // isset() => check value present or not
@@ -98,8 +98,10 @@ echo "<h3>Data from another srcipt in another file</h3><br>";
 //1)  current and next pointer
     echo "<br> The current value in current pointer is ".current($fruits);
     echo "<br> The next value is ".next($fruits);
-    echo "<br> The next value is ".next($fruits);
-    echo "<br> The next value is ".next($fruits); # null
+    echo "<br> The next value is ".prev($fruits);
+    echo "<br> The next value is ".reset($fruits); 
+    echo "<br> The next value is ".end($fruits); 
+    echo "<br> The next value is ".key($fruits); 
 
 //2) using each() function  // deprecated
 // while($element =each($fruits)){
@@ -187,6 +189,7 @@ echo "<h3>Data from another srcipt in another file</h3><br>";
     echo "<br>8 Reversed string = ". strrev($str); // Reverses the string $str
     echo "<br>9 Word count = ". str_word_count($str); // Returns the number of words in the string $str
     echo "<br>10 Replaced string = ". str_replace("sample", "example", $str); // Replaces all occurrences of the string "sample" in the string $str with the string "example"
+    
     echo "<br>11 Substring = ". substr($str, 0, 10); // Returns a substring of the string $str starting from the first character and ending at the 10th character
     echo "<br>12 String split = ". implode(", ", str_split($str, 5)); // Splits the string $str into an array of strings, each with a length of 5 characters
     echo "<br>13 String chunk split = ". implode(", ", str_split($str, 5)); // Splits the string $str into an array of strings, each with a length of 5 characters
@@ -315,7 +318,7 @@ echo "Sort an array by key in reverse order: " . print_r(krsort($array)). "<br>"
     imagecopyresampled($scaled_img,$image,0,0,0,0,$x,$y,$width,$heigth);
     header('Content-Type:image/png');
     imagepng($image); 
-    */
+    
 ?>
 <?php  // pdf 
 

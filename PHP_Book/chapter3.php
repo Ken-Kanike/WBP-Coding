@@ -224,6 +224,7 @@ $obj= new Demo();
     class Child2 extends Parent2{
         function dispData(){
             echo "<br>This is overriden method in child class.";
+            Parent2::dispData();
         }
     }
 
