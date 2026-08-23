@@ -12,7 +12,7 @@
             case "SUB": $result = $num1 - $num2;
                         echo "difference  = ".$result;
                         break;
-            case "MUL": $result = $num1  - $num2;
+            case "MUL": $result = $num1 * $num2;
                         echo "product  = ".$result;
                         break;
             case "DIV": $result = $num1 / $num2;

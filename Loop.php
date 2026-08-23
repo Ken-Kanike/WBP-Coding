@@ -22,15 +22,14 @@
         $j++;
     }
     echo "even no from 1 to 30 using do while Loop are :<br>";
-    $k=1;
-    do{
+    do {
         if($k%2==0)
         {
             echo $k;
             echo "<br>";
         }
         $k++;
-    }while($k<=60)
+    } while($k<=60);
 
     ?>
 </body>

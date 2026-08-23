@@ -1,10 +1,10 @@
 <h3>Write a program to send and receive mail using PHP</h3>
 <?php
      // Example usage: sending an email
-     $to = "receiver@gmail.com";
+     $to = "receiver@example.com";
      $subject = "Test Email";
      $body = "This is a test email sent from PHP.";
-     $header ="from:junaidshaikh7722@gmail.com";
+     $header = "from:developer@example.com";
 
      if (mail($to, $subject, $body,$header)) {
             echo "Email sent successfully to $to<br>";

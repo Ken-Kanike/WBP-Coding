@@ -18,7 +18,7 @@ if (!$conn) {
 }
 
 // SQL query to update data in the employee table
-$sql = "UPDATE TYCO2 SET name='Junaid' WHERE rollno='1856'";
+$sql = "UPDATE TYCO2 SET name='Alex' WHERE rollno='1856'";
 
 if (mysqli_query($conn, $sql)) {
     echo "Data updated successfully!";

@@ -10,13 +10,13 @@
             break;
             case 3 : echo ("<br>Day = Tuesday"); 
             break;
-            case 4 : echo ("<br>Day = Wednessday"); 
+            case 4 : echo ("<br>Day = Wednesday"); 
             break;
             case 5 : echo ("<br>Day = Thursday"); 
             break;
             case 6 : echo ("<br>Day = Friday");
             break;
-            case 1 : echo ("<br>Day = Saturday"); 
+            case 7 : echo ("<br>Day = Saturday"); 
             break;
 
             default : echo ("<br>Invalid Day");  

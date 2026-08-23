@@ -7,7 +7,7 @@
         {
             echo ("<br>".$a ." is Positive"); 
         }
-        else if($b < 0)
+        else if($a < 0)
         {
             echo ("<br>".$a ." is Negative"); 
         }

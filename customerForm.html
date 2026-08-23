@@ -1,16 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Customer form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Registration | PHP Form Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-glow: rgba(16, 185, 129, 0.35);
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #064e3b 100%);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: rgba(15, 23, 42, 0.7);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { min-height: 100vh; background: var(--bg-gradient); color: var(--text-main); display: flex; flex-direction: column; justify-content: space-between; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2.5rem; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .brand i { color: var(--primary); }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+    .main-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem; }
+    .form-card { width: 100%; max-width: 480px; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-glow); }
+    .form-header { text-align: center; margin-bottom: 2rem; }
+    .form-header h2 { font-family: 'Outfit', sans-serif; font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .form-header p { color: var(--text-muted); font-size: 0.9rem; }
+    .form-group { margin-bottom: 1.15rem; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.4rem; color: #cbd5e1; }
+    .form-input, .form-textarea { width: 100%; padding: 0.8rem 1rem; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 0.75rem; color: #fff; font-size: 0.95rem; outline: none; }
+    .form-textarea { min-height: 80px; resize: vertical; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25); }
+    .btn-submit { width: 100%; padding: 0.85rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 0.75rem; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; box-shadow: 0 10px 15px -3px var(--primary-glow); transition: all 0.2s ease; }
+    .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
 </head>
-<body align="center">
-    <form action="customerServer.php"  method="post" style="padding-top: 100px;">
-        <input  name="cname" placeholder="Enter customers name" /><br><br>
-        <input  type="password" name="cpass" placeholder="Enter customers password" /><br><br>
-        <input  type="number" name="cnumber" placeholder="Enter customers number" /><br><br>
-        <input  type="date" name="cdob" placeholder="Enter customers birth of date" /><br><br>
-        <textarea name="caddress" placeholder="Enter customers address"></textarea><br> <br>
-        <input type="submit" name="submit" value="register"/><br>
-    </form>
+<body>
+  <header class="navbar">
+    <a class="brand" href="customerForm.html"><i class="fa-solid fa-address-card"></i> Customer Registration</a>
+    <a class="nav-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Hub Gateway</a>
+  </header>
+
+  <main class="main-wrap">
+    <div class="form-card">
+      <div class="form-header">
+        <h2>Customer Portal</h2>
+        <p>Register customer profile with server-side processing</p>
+      </div>
+
+      <form action="customerServer.php" method="post">
+        <div class="form-group">
+          <label class="form-label" for="cname">Customer Name</label>
+          <input type="text" id="cname" name="cname" class="form-input" placeholder="e.g. Jane Doe" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cpass">Security Password</label>
+          <input type="password" id="cpass" name="cpass" class="form-input" placeholder="••••••••" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cnumber">Contact Number</label>
+          <input type="number" id="cnumber" name="cnumber" class="form-input" placeholder="9876543210" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cdob">Date of Birth</label>
+          <input type="date" id="cdob" name="cdob" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="caddress">Billing Address</label>
+          <textarea id="caddress" name="caddress" class="form-textarea" placeholder="Enter physical street address..." required></textarea>
+        </div>
+
+        <button type="submit" name="submit" value="register" class="btn-submit">
+          <i class="fa-solid fa-user-check"></i> Register Customer
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2024-2026 MSBTE Web-Based Programming &bull; Customer Module
+  </footer>
 </body>
 </html>

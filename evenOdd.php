@@ -3,10 +3,10 @@
     <?php
         $num = 1;
 
-        if( $num / 2 == 0) 
+        if ($num % 2 == 0) 
         {
             echo ($num . " is Even");  
-        }  else {
+        } else {
             echo ($num  . " is Odd");  
         }
        

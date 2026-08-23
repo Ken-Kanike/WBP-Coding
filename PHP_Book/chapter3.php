@@ -62,7 +62,7 @@ $obj= new Demo();
         }
     }
 
-    $stud = new Student("Junaid",1856);
+    $stud = new Student("Alex", 1856);
     echo "<br>Student Details:-".$stud->printData();
 ?>
 

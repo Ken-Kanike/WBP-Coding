@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Processing Demo | PHP Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ec4899;
+      --primary-dark: #db2777;
+      --primary-glow: rgba(236, 72, 153, 0.35);
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #500724 100%);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: rgba(15, 23, 42, 0.7);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { min-height: 100vh; background: var(--bg-gradient); color: var(--text-main); display: flex; flex-direction: column; justify-content: space-between; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2.5rem; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .brand i { color: var(--primary); }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+    .main-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem; }
+    .form-card { width: 100%; max-width: 460px; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-glow); }
+    .form-header { text-align: center; margin-bottom: 2rem; }
+    .form-header h2 { font-family: 'Outfit', sans-serif; font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .form-header p { color: var(--text-muted); font-size: 0.9rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.4rem; color: #cbd5e1; }
+    .form-input { width: 100%; padding: 0.85rem 1rem; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 0.75rem; color: #fff; font-size: 1rem; outline: none; }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.25); }
+    .btn-submit { width: 100%; padding: 0.85rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 0.75rem; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.25rem; box-shadow: 0 10px 15px -3px var(--primary-glow); transition: all 0.2s ease; }
+    .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="demoHTML.html"><i class="fa-solid fa-book-open"></i> PHP Book &bull; HTML Form Demo</a>
+    <a class="nav-link" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Hub Gateway</a>
+  </header>
+
+  <main class="main-wrap">
+    <div class="form-card">
+      <div class="form-header">
+        <h2>Demo Form Handler</h2>
+        <p>Post parameters to demoServer.php</p>
+      </div>
+
+      <form action="demoServer.php" method="post">
+        <div class="form-group">
+          <label class="form-label" for="username">User Name</label>
+          <input type="text" id="username" name="username" class="form-input" placeholder="e.g. Alex" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="alex@example.com" required />
+        </div>
+
+        <button type="submit" name="submit" class="btn-submit">
+          <i class="fa-solid fa-paper-plane"></i> Send to Server
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2024-2026 MSBTE Web-Based Programming
+  </footer>
+</body>
+</html>

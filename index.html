@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Web-Based Programming (WBP) Complete Codebase & Practical Laboratory Showcase by Ken-Kanike. PHP, MySQL, HTML5, JavaScript & Modern Web Engineering.">
+  <title>WBP Coding | Web-Based Programming Hub & Showcase Portal</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-surface: #0e131f;
+      --bg-card: rgba(18, 24, 38, 0.7);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-card-hover: rgba(99, 102, 241, 0.4);
+      --primary: #6366f1;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --glow: rgba(99, 102, 241, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(236, 72, 153, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Header Navigation */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--primary-gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: #fff;
+      box-shadow: 0 4px 15px var(--glow);
+    }
+
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: -3px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.25rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-gradient {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-card);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .stat-card .num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-card .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Controls: Search & Tabs */
+    .controls-wrap {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 1.25rem 1rem 3.25rem;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 1rem;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--glow);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+    }
+
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      border-radius: 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 15px var(--glow);
+    }
+
+    /* Cards Grid */
+    .catalog-section {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .item-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .item-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .item-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .item-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .icon-practicals { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+    .icon-book { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
+    .icon-project { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+    .icon-db { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .icon-exam { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+    .tag-badge {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-html { background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
+    .tag-php { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+    .tag-sql { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      min-height: 42px;
+    }
+
+    .card-footer {
+      display: flex;
+      gap: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1rem;
+    }
+
+    .btn-card {
+      flex: 1;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-launch {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--primary);
+    }
+
+    .btn-launch:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+
+    .btn-code {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-card);
+    }
+
+    .btn-code:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-window {
+      width: 100%;
+      max-width: 800px;
+      max-height: 85vh;
+      background: #0e131f;
+      border: 1px solid var(--border-card-hover);
+      border-radius: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      background: #090d16;
+    }
+
+    .code-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer-main {
+      border-top: 1px solid var(--border-card);
+      background: rgba(7, 9, 14, 0.9);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="header">
+    <a class="brand-logo" href="index.html">
+      <div class="brand-icon">
+        <i class="fa-solid fa-code"></i>
+      </div>
+      <div class="brand-text">
+        <h1>WBP Coding</h1>
+        <span>Web-Based Programming Hub &bull; Ken-Kanike</span>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <a href="https://github.com/Ken-Kanike/WBP-Coding" target="_blank" class="btn-github">
+        <i class="fa-brands fa-github"></i> GitHub Repo
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">
+      <i class="fa-solid fa-rocket"></i> Production-Ready MSBTE Curriculum Suite
+    </div>
+    <h2>
+      Master Web Programming with<br>
+      <span class="hero-gradient">PHP, MySQL &amp; Modern Frontends</span>
+    </h2>
+    <p>
+      An exhaustive, highly structured collection of academic practicals, textbook exercises, mini-project portals, and database integrations built with clean code standards.
+    </p>
+
+    <!-- Key Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="num">21+</div>
+        <div class="label">PHP Lab Practicals</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">8+</div>
+        <div class="label">Interactive HTML5 Forms</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">5</div>
+        <div class="label">PHP Book Chapters</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">100%</div>
+        <div class="label">Open Source &bull; MIT</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls: Search & Tabs -->
+  <div class="controls-wrap">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search modules, practicals (e.g. OOP, Regex, Database, Form, Loop, Array)..." oninput="filterItems()">
+    </div>
+
+    <div class="filter-tabs">
+      <button class="tab-btn active" onclick="setFilter('all', this)"><i class="fa-solid fa-layer-group"></i> All Modules</button>
+      <button class="tab-btn" onclick="setFilter('practicals', this)"><i class="fa-solid fa-flask"></i> Practicals</button>
+      <button class="tab-btn" onclick="setFilter('forms', this)"><i class="fa-solid fa-window-maximize"></i> Forms &amp; Calculators</button>
+      <button class="tab-btn" onclick="setFilter('book', this)"><i class="fa-solid fa-book"></i> PHP Book Chapters</button>
+      <button class="tab-btn" onclick="setFilter('db', this)"><i class="fa-solid fa-database"></i> Database CRUD</button>
+      <button class="tab-btn" onclick="setFilter('project', this)"><i class="fa-solid fa-cart-shopping"></i> Shopping Portal</button>
+    </div>
+  </div>
+
+  <!-- Catalog Section -->
+  <section class="catalog-section">
+    <div class="grid-container" id="cardsGrid">
+      
+      <!-- Interactive Forms & Live Frontends -->
+      <div class="item-card" data-category="forms" data-tags="calculator arithmetic php math">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-calculator"></i></div>
+          <span class="tag-badge tag-html">Interactive</span>
+        </div>
+        <h3 class="card-title">Arithmetic Calculator</h3>
+        <p class="card-desc">Interactive arithmetic operations engine supporting Addition, Subtraction, Multiplication, and Division.</p>
+        <div class="card-footer">
+          <a href="arithmaticOP.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live App</a>
+          <button class="btn-card btn-code" onclick="showCode('arithmaticServer.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="forms" data-tags="customer registration form date validation">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-id-card"></i></div>
+          <span class="tag-badge tag-html">Interactive</span>
+        </div>
+        <h3 class="card-title">Customer Registration</h3>
+        <p class="card-desc">Complete client registration form capturing name, password, phone, DOB, and billing address.</p>
+        <div class="card-footer">
+          <a href="customerForm.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live App</a>
+          <button class="btn-card btn-code" onclick="showCode('customerServer.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="forms" data-tags="student admission form academic">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-graduation-cap"></i></div>
+          <span class="tag-badge tag-html">Interactive</span>
+        </div>
+        <h3 class="card-title">Student Admission Form</h3>
+        <p class="card-desc">Academic student intake portal with branch selection radio pills and server-side processing.</p>
+        <div class="card-footer">
+          <a href="studentForm.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live App</a>
+          <button class="btn-card btn-code" onclick="showCode('studentServer.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="forms" data-tags="login auth session">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-lock"></i></div>
+          <span class="tag-badge tag-html">Interactive</span>
+        </div>
+        <h3 class="card-title">Member Quick Login</h3>
+        <p class="card-desc">User authentication gateway validating session tokens and authorization parameters.</p>
+        <div class="card-footer">
+          <a href="myLogin.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live App</a>
+          <button class="btn-card btn-code" onclick="showCode('login.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <!-- Shopping Portal (Mini Project) -->
+      <div class="item-card" data-category="project" data-tags="shopping portal e-commerce admin auth user login">
+        <div class="card-top">
+          <div class="card-icon icon-project"><i class="fa-solid fa-cart-shopping"></i></div>
+          <span class="tag-badge tag-html">Mini Project</span>
+        </div>
+        <h3 class="card-title">Shopping Portal &bull; User Auth</h3>
+        <p class="card-desc">Modern glassmorphic user authentication portal with side-by-side Sign In and Sign Up tabs.</p>
+        <div class="card-footer">
+          <a href="PHPmp/login.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Launch UI</a>
+          <button class="btn-card btn-code" onclick="showCode('PHPmp/login.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="project" data-tags="admin shopping portal login backend">
+        <div class="card-top">
+          <div class="card-icon icon-project"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="tag-badge tag-html">Mini Project</span>
+        </div>
+        <h3 class="card-title">Shopping Portal &bull; Admin Auth</h3>
+        <p class="card-desc">Executive administrator authentication portal for catalog control and system management.</p>
+        <div class="card-footer">
+          <a href="PHPmp/index.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Launch UI</a>
+          <button class="btn-card btn-code" onclick="showCode('PHPmp/index.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <!-- Practicals -->
+      <div class="item-card" data-category="practicals" data-tags="practical 10 form controls radio checkbox">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-square-check"></i></div>
+          <span class="tag-badge tag-php">Practical 10.1</span>
+        </div>
+        <h3 class="card-title">Registration Form Controls</h3>
+        <p class="card-desc">Design registration forms with text inputs, radio buttons, checkbox arrays, and submit handlers.</p>
+        <div class="card-footer">
+          <a href="Practicals/pr10_1.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live Form</a>
+          <button class="btn-card btn-code" onclick="showCode('Practicals/pr10_1.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="practical 10 validation table form">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-table-list"></i></div>
+          <span class="tag-badge tag-php">Practical 10.2</span>
+        </div>
+        <h3 class="card-title">Form Validation &amp; Layout</h3>
+        <p class="card-desc">Validate form controls, textareas, and email structures with structured table formatting.</p>
+        <div class="card-footer">
+          <a href="Practicals/pr10_2.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live Form</a>
+          <button class="btn-card btn-code" onclick="showCode('Practicals/pr10_2.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="practical 11 listbox combobox hidden field">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-list-check"></i></div>
+          <span class="tag-badge tag-php">Practical 11</span>
+        </div>
+        <h3 class="card-title">Listbox, Combobox &amp; Hidden Fields</h3>
+        <p class="card-desc">Combobox select dropdowns, multi-select subject listboxes, and hidden state security fields.</p>
+        <div class="card-footer">
+          <a href="Practicals/pr11.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live Form</a>
+          <button class="btn-card btn-code" onclick="showCode('Practicals/pr11.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="practical 12 email validation regex filter">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-at"></i></div>
+          <span class="tag-badge tag-php">Practical 12</span>
+        </div>
+        <h3 class="card-title">Email Validation Engine</h3>
+        <p class="card-desc">Validate email address syntax using PHP filter_var and RFC-compliant regular expressions.</p>
+        <div class="card-footer">
+          <a href="Practicals/pr12.html" class="btn-card btn-launch"><i class="fa-solid fa-play"></i> Live Form</a>
+          <button class="btn-card btn-code" onclick="showCode('Practicals/pr12.php')"><i class="fa-solid fa-code"></i> PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="oop class constructor encapsulation inheritance practical 8">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-cubes"></i></div>
+          <span class="tag-badge tag-php">Practical 8</span>
+        </div>
+        <h3 class="card-title">OOP Classes &amp; Constructors</h3>
+        <p class="card-desc">Object-oriented programming in PHP with class definitions, parameterized constructors, and encapsulation.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('Practicals/pr8.php')"><i class="fa-solid fa-code"></i> View PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="fpdf pdf generation document practical 15">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-file-pdf"></i></div>
+          <span class="tag-badge tag-php">Practical 15</span>
+        </div>
+        <h3 class="card-title">FPDF Dynamic PDF Generation</h3>
+        <p class="card-desc">Generate formatted PDF documents dynamically with custom headers, footers, margins, and cells.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('Practicals/pr15_1.php')"><i class="fa-solid fa-code"></i> View PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="mail imap send receive practical 14">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-envelope"></i></div>
+          <span class="tag-badge tag-php">Practical 14</span>
+        </div>
+        <h3 class="card-title">Email Transmission &amp; IMAP</h3>
+        <p class="card-desc">PHP mail() function and IMAP mailbox connectivity for unread message parsing.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('Practicals/pr14_1.php')"><i class="fa-solid fa-code"></i> View PHP Code</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="practicals" data-tags="cookies sessions state management practical 13">
+        <div class="card-top">
+          <div class="card-icon icon-practicals"><i class="fa-solid fa-cookie-bite"></i></div>
+          <span class="tag-badge tag-php">Practical 13</span>
+        </div>
+        <h3 class="card-title">Cookies &amp; Session Management</h3>
+        <p class="card-desc">Stateful web programming using $_COOKIE and $_SESSION variables with expiry control.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('Practicals/pr13_1.php')"><i class="fa-solid fa-code"></i> View PHP Code</button>
+        </div>
+      </div>
+
+      <!-- Database Systems -->
+      <div class="item-card" data-category="db" data-tags="mysql database crud create table insert update delete">
+        <div class="card-top">
+          <div class="card-icon icon-db"><i class="fa-solid fa-database"></i></div>
+          <span class="tag-badge tag-sql">Database</span>
+        </div>
+        <h3 class="card-title">MySQL Database Operations</h3>
+        <p class="card-desc">Complete CRUD suite: DB provisioning, table creation, record insertion, updates, and deletion.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('database codes/fetchData.php')"><i class="fa-solid fa-code"></i> View CRUD Suite</button>
+        </div>
+      </div>
+
+      <!-- PHP Book Modules -->
+      <div class="item-card" data-category="book" data-tags="php book chapter 1 basics data types loops syntax">
+        <div class="card-top">
+          <div class="card-icon icon-book"><i class="fa-solid fa-book"></i></div>
+          <span class="tag-badge tag-php">Chapter 1</span>
+        </div>
+        <h3 class="card-title">PHP Fundamentals &amp; Control Flow</h3>
+        <p class="card-desc">Data types, constants, arithmetic/relational operators, switch cases, leap years, and matrix generation.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('PHP_Book/chapter1.php')"><i class="fa-solid fa-code"></i> View Chapter</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="book" data-tags="php book chapter 2 arrays functions extract explode">
+        <div class="card-top">
+          <div class="card-icon icon-book"><i class="fa-solid fa-book-bookmark"></i></div>
+          <span class="tag-badge tag-php">Chapter 2</span>
+        </div>
+        <h3 class="card-title">Array Engineering &amp; Built-in Functions</h3>
+        <p class="card-desc">Array creation, extract(), compact(), explode(), implode(), array_flip(), sorting, and pointer traversal.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('PHP_Book/chapter2.php')"><i class="fa-solid fa-code"></i> View Chapter</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="book" data-tags="php book chapter 3 oop classes inheritance encapsulation">
+        <div class="card-top">
+          <div class="card-icon icon-book"><i class="fa-solid fa-book-open"></i></div>
+          <span class="tag-badge tag-php">Chapter 3</span>
+        </div>
+        <h3 class="card-title">Object-Oriented Programming (OOP)</h3>
+        <p class="card-desc">In-depth OOP masterclass: Constructors, destructors, visibility modifiers, getters/setters, and inheritance.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('PHP_Book/chapter3.php')"><i class="fa-solid fa-code"></i> View Chapter</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="book" data-tags="php book chapter 4 advanced forms files gd graphics imap">
+        <div class="card-top">
+          <div class="card-icon icon-book"><i class="fa-solid fa-book-journal-whills"></i></div>
+          <span class="tag-badge tag-php">Chapter 4</span>
+        </div>
+        <h3 class="card-title">Advanced Web Functions &amp; GD Graphics</h3>
+        <p class="card-desc">File uploads, image manipulation with GD, email routing, session lifecycle, and cookies.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('PHP_Book/chapter4.php')"><i class="fa-solid fa-code"></i> View Chapter</button>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="book" data-tags="php book chapter 5 mysql mysqli database connection sql">
+        <div class="card-top">
+          <div class="card-icon icon-book"><i class="fa-solid fa-server"></i></div>
+          <span class="tag-badge tag-php">Chapter 5</span>
+        </div>
+        <h3 class="card-title">MySQL Database Engineering</h3>
+        <p class="card-desc">MySQL architecture, mysqli procedural and object-oriented connections, parameterized queries, and transactions.</p>
+        <div class="card-footer">
+          <button class="btn-card btn-code" style="width:100%" onclick="showCode('PHP_Book/chapter5.php')"><i class="fa-solid fa-code"></i> View Chapter</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Code Viewer Modal -->
+  <div id="codeModal" class="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalFilename"><i class="fa-solid fa-file-code"></i> Source Code</h3>
+        <button class="btn-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <pre class="code-display" id="modalCode">Loading source code...</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-main">
+    <div class="footer-content">
+      <div class="brand-text">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem;">WBP Coding Repository</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Engineered for Web-Based Programming (PHP / MySQL / HTML5) Academic Excellence</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Ken-Kanike/WBP-Coding" target="_blank"><i class="fa-brands fa-github"></i> Repository</a>
+        <a href="https://github.com/Ken-Kanike/WBP-Coding/blob/main/LICENSE" target="_blank"><i class="fa-solid fa-scale-balanced"></i> MIT License</a>
+        <a href="arithmaticOP.html"><i class="fa-solid fa-calculator"></i> Calculator</a>
+        <a href="PHPmp/login.html"><i class="fa-solid fa-cart-shopping"></i> Shopping Portal</a>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">
+        &copy; 2024-2026 Ken-Kanike &bull; Released under the MIT License
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Search and category filtering
+    let currentCategory = 'all';
+
+    function setFilter(category, btn) {
+      currentCategory = category;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterItems();
+    }
+
+    function filterItems() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.item-card');
+
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const tags = card.getAttribute('data-tags') || '';
+        const title = card.querySelector('.card-title').innerText.toLowerCase();
+        const desc = card.querySelector('.card-desc').innerText.toLowerCase();
+
+        const matchesCat = (currentCategory === 'all' || cat === currentCategory);
+        const matchesSearch = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
+
+        if (matchesCat && matchesSearch) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal code viewer with dynamic local fetch
+    async function showCode(filePath) {
+      const modal = document.getElementById('codeModal');
+      const filenameEl = document.getElementById('modalFilename');
+      const codeEl = document.getElementById('modalCode');
+
+      filenameEl.innerHTML = `<i class="fa-solid fa-file-code"></i> ${filePath}`;
+      codeEl.innerText = 'Fetching source snippet...';
+      modal.style.display = 'flex';
+
+      try {
+        const res = await fetch(filePath);
+        if (res.ok) {
+          const text = await res.text();
+          codeEl.innerText = text;
+        } else {
+          codeEl.innerText = `// File located at: ${filePath}\n// Browse on GitHub: https://github.com/Ken-Kanike/WBP-Coding/blob/main/${filePath}`;
+        }
+      } catch (err) {
+        codeEl.innerText = `// File located at: ${filePath}\n// Browse on GitHub: https://github.com/Ken-Kanike/WBP-Coding/blob/main/${filePath}`;
+      }
+    }
+
+    function closeModal(event) {
+      if (!event || event.target.id === 'codeModal' || event.target.closest('.btn-close')) {
+        document.getElementById('codeModal').style.display = 'none';
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>

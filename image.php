@@ -24,15 +24,21 @@
 
 
 <?php 
-   echo "hello<br>";
-   $img = imagecreatefromjpeg("C:/xampp/htdocs/WBP Coding/house.jpeg");
-   $width = imagesx($img);
-   $heigth = imagesy($img);
-   $x = $width /2;
-   $y = $heigth /2;
-   $scaledImg = imagecreatetruecolor($x,$y);
-   imagecopyresampled($scaledImg,$img,0,0,0,0,$x,$y,$width,$heigth);
-   $red = imagecolorallocate($img,255,0,0);
-   header("Content-Type:image/png");
-   imagepng($scaledImg);
+   $imagePath = __DIR__ . '/house.jpeg';
+   if (file_exists($imagePath)) {
+       $img = imagecreatefromjpeg($imagePath);
+       $width = imagesx($img);
+       $height = imagesy($img);
+       $x = (int)($width / 2);
+       $y = (int)($height / 2);
+       $scaledImg = imagecreatetruecolor($x, $y);
+       imagecopyresampled($scaledImg, $img, 0, 0, 0, 0, $x, $y, $width, $height);
+       header("Content-Type: image/png");
+       imagepng($scaledImg);
+       imagedestroy($img);
+       imagedestroy($scaledImg);
+   } else {
+       header("Content-Type: text/plain");
+       echo "Sample image not found: house.jpeg";
+   }
 ?>

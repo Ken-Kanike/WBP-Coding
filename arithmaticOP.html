@@ -1,16 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Customer form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arithmetic Operations | PHP Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --primary-glow: rgba(139, 92, 246, 0.35);
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: rgba(15, 23, 42, 0.7);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { min-height: 100vh; background: var(--bg-gradient); color: var(--text-main); display: flex; flex-direction: column; justify-content: space-between; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2.5rem; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .brand i { color: var(--primary); }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+    .main-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem; }
+    .calc-card { width: 100%; max-width: 460px; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-glow); }
+    .calc-header { text-align: center; margin-bottom: 2rem; }
+    .calc-header h2 { font-family: 'Outfit', sans-serif; font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .calc-header p { color: var(--text-muted); font-size: 0.9rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.4rem; color: #cbd5e1; }
+    .form-input { width: 100%; padding: 0.85rem 1rem; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 0.75rem; color: #fff; font-size: 1rem; outline: none; }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25); }
+    .btn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+    .btn-op { padding: 0.85rem; border: none; border-radius: 0.75rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; color: #fff; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .btn-add { background: linear-gradient(135deg, #10b981, #059669); }
+    .btn-sub { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .btn-mul { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .btn-div { background: linear-gradient(135deg, #ec4899, #db2777); }
+    .btn-op:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .result-box { margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border); border-radius: 0.75rem; text-align: center; font-size: 1.05rem; font-weight: 600; color: #a78bfa; display: none; }
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
 </head>
-<body align="center">
-    <form action="arithmaticServer.php"  method="post" style="padding-top: 100px;">
-        <input  type="number" name="num1" placeholder="Enter first number" /><br><br>
-        <input  type="number" name="num2" placeholder="Enter second number" /><br><br>
-        <input type="submit" name="btn_submit" value="ADD"/>
-        <input type="submit" name="btn_submit" value="SUB"/>
-        <input type="submit" name="btn_submit" value="MUL"/>
-        <input type="submit" name="btn_submit" value="DIV"/>
-    </form>
+<body>
+  <header class="navbar">
+    <a class="brand" href="arithmaticOP.html"><i class="fa-solid fa-calculator"></i> Arithmetic Operations</a>
+    <a class="nav-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Hub Gateway</a>
+  </header>
+
+  <main class="main-wrap">
+    <div class="calc-card">
+      <div class="calc-header">
+        <h2>Arithmetic Calculator</h2>
+        <p>Perform binary arithmetic computations via PHP server</p>
+      </div>
+
+      <form id="calcForm" action="arithmaticServer.php" method="post">
+        <div class="form-group">
+          <label class="form-label" for="num1">First Number (Num 1)</label>
+          <input type="number" step="any" id="num1" name="num1" class="form-input" placeholder="e.g. 42" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="num2">Second Number (Num 2)</label>
+          <input type="number" step="any" id="num2" name="num2" class="form-input" placeholder="e.g. 7" required />
+        </div>
+
+        <div class="btn-grid">
+          <button type="submit" name="btn_submit" value="ADD" class="btn-op btn-add" onclick="calculateClient('ADD', event)">
+            <i class="fa-solid fa-plus"></i> ADD
+          </button>
+          <button type="submit" name="btn_submit" value="SUB" class="btn-op btn-sub" onclick="calculateClient('SUB', event)">
+            <i class="fa-solid fa-minus"></i> SUB
+          </button>
+          <button type="submit" name="btn_submit" value="MUL" class="btn-op btn-mul" onclick="calculateClient('MUL', event)">
+            <i class="fa-solid fa-xmark"></i> MUL
+          </button>
+          <button type="submit" name="btn_submit" value="DIV" class="btn-op btn-div" onclick="calculateClient('DIV', event)">
+            <i class="fa-solid fa-divide"></i> DIV
+          </button>
+        </div>
+
+        <div id="resultBox" class="result-box"></div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2024-2026 MSBTE Web-Based Programming &bull; Arithmetic Module
+  </footer>
+
+  <script>
+    function calculateClient(op, event) {
+      // If hosted statically on GitHub Pages, provide client-side calculation directly
+      if (window.location.protocol.startsWith('http') && window.location.hostname.includes('github.io')) {
+        event.preventDefault();
+        const n1 = parseFloat(document.getElementById('num1').value);
+        const n2 = parseFloat(document.getElementById('num2').value);
+        const box = document.getElementById('resultBox');
+        if (isNaN(n1) || isNaN(n2)) {
+          box.style.display = 'block';
+          box.innerText = 'Please enter both numbers.';
+          return;
+        }
+        let res;
+        if (op === 'ADD') res = n1 + n2;
+        if (op === 'SUB') res = n1 - n2;
+        if (op === 'MUL') res = n1 * n2;
+        if (op === 'DIV') res = n2 !== 0 ? (n1 / n2) : 'Error: Divide by zero';
+        box.style.display = 'block';
+        box.innerHTML = `<i class="fa-solid fa-calculator"></i> Result (${op}): <strong>${res}</strong>`;
+      }
+    }
+  </script>
 </body>
 </html>

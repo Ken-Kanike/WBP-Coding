@@ -15,7 +15,7 @@ print($a); */
 ?>
 
 <?php
-    include("chapter2.php")
+    // include("chapter2.php");
 ?>
 
 <?php
@@ -103,7 +103,7 @@ print($a); */
   for( $i = $n ; $i >= 1 ; $i-- ){
     $fact = $fact * $i;
   }
-  echo "<br>Factorial of $n = $fact"
+  echo "<br>Factorial of $n = $fact";
 ?>
 
 <?php
@@ -120,11 +120,12 @@ print($a); */
 ?>
 
 <?php
-// reminder progra, using date function 3 and 10
+// reminder program using date function 3 and 10
   echo "<br>Today is ".date('d/m/y');
-  if(date('d'==3)){
+  $currentDay = (int)date('d');
+  if($currentDay == 3){
     echo "<br>Dentist Appointment";
-  }else if(date('d')==10){
+  } else if($currentDay == 10){
     echo "<br>Go to conference";
   } else {
     echo "<br>No event!";
@@ -186,7 +187,7 @@ print($a); */
     echo "<th>Cube</th>";
     echo "</tr>";
     for($i = 1 ; $i <= 10;$i++){
-        $sqroot = $i*0.5;
+        $sqroot = round(sqrt($i), 2);
         $square = $i*$i;
         $cube = $i*$i*$i;
         echo "<tr>";

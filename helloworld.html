@@ -1,8 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World | PHP & HTML Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.35);
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #0369a1 100%);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { min-height: 100vh; background: var(--bg-gradient); color: var(--text-main); display: flex; flex-direction: column; justify-content: space-between; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2.5rem; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .brand i { color: var(--primary); }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+    .main-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem; }
+    .hero-card { width: 100%; max-width: 520px; text-align: center; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 1.5rem; padding: 3rem 2rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-glow); }
+    .hero-icon { width: 70px; height: 70px; margin: 0 auto 1.5rem; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 1.25rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--primary); }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 2.25rem; margin-bottom: 0.75rem; background: linear-gradient(135deg, #fff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; }
+    .code-box { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 0.75rem; padding: 1.25rem; text-align: left; font-family: 'Courier New', monospace; font-size: 0.95rem; color: #38bdf8; margin-bottom: 2rem; }
+    .btn-action { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; background: linear-gradient(135deg, #38bdf8, #0284c7); border: none; border-radius: 0.75rem; color: #fff; font-size: 1rem; font-weight: 600; text-decoration: none; cursor: pointer; box-shadow: 0 10px 15px -3px var(--primary-glow); transition: all 0.2s ease; }
+    .btn-action:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
+</head>
 <body>
-    <?php
-      echo "Hello World";
-    ?>
+  <header class="navbar">
+    <a class="brand" href="helloworld.html"><i class="fa-solid fa-code"></i> Hello World</a>
+    <a class="nav-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Hub Gateway</a>
+  </header>
+
+  <main class="main-wrap">
+    <div class="hero-card">
+      <div class="hero-icon"><i class="fa-solid fa-earth-americas"></i></div>
+      <h1>Hello World!</h1>
+      <p>Welcome to Web-Based Programming (WBP) with PHP, MySQL, and Modern Responsive Frontend Architecture.</p>
+      <div class="code-box">
+        &lt;?php<br>
+        &nbsp;&nbsp;echo "Hello World from PHP &amp; Web Stack!";<br>
+        ?&gt;
+      </div>
+      <a href="index.html" class="btn-action">
+        <i class="fa-solid fa-compass"></i> Explore All Modules
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2024-2026 MSBTE Web-Based Programming
+  </footer>
 </body>
 </html>

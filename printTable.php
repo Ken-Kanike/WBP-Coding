@@ -55,7 +55,7 @@
     echo "<th>Cube</th>";
     echo "</tr>";
     for($i = 1 ; $i <= 10;$i++){
-        $sqroot = $i*0.5;
+        $sqroot = round(sqrt($i), 2);
         $square = $i*$i;
         $cube = $i*$i*$i;
         echo "<tr>";
