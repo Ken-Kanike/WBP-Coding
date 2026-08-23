@@ -1,176 +1,277 @@
- Define MySQL
- 
- SQL commands
-CREATE DATABASE dbname;    => creates database
-SHOW DATABASES;            => displays all databse names
-USE dbname;                => Uses specified database
-CREATE TABLE table_name(id INT(4), name VARCHAR(20));       => creates table
-SHOW TABLES;                             => displays all table names
-DESCRIBE table_name;                     => show colum , rows and other details of table
-INSERT INTO table_name VALUES(1,"me");   => inserts data
-SELECT * FROM table_name;                => fetch all data
-SELECT * FROM table_name WHERE id=1;     => fetch spcific data
-SELECT * FROM table_name ORDER BY name;  => fetch sorted by name data
-UPDATE table_name SET name="she" WHERE id=4;  =>updates table data
-DELETE FROM table_name WHERE id = 3;          => deletes table data
-DROP TABLE table_name;                        => deletes table
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: MySQL & Database Engineering | PHP Mastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(18, 24, 38, 0.85);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(16, 185, 129, 0.4);
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-dark); color: var(--text-main); line-height: 1.7; padding: 2rem 1.5rem; background-image: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%); background-attachment: fixed; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-card); }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+    .brand i { color: var(--primary); }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s ease; }
+    .nav-link:hover { color: #fff; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .badge { display: inline-block; padding: 0.35rem 0.9rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 9999px; color: #34d399; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 2.75rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .lead { color: var(--text-muted); font-size: 1.15rem; max-width: 700px; margin: 0 auto; }
+    .section-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-card); border-radius: 1.25rem; padding: 2rem; margin-bottom: 2rem; transition: border-color 0.3s ease; }
+    .section-card:hover { border-color: var(--border-glow); }
+    h2 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+    h2 i { color: var(--primary); }
+    h3 { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 600; color: #cbd5e1; margin: 1.25rem 0 0.5rem; }
+    p, li { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 0.75rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+    pre { background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0.85rem; padding: 1.25rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #e2e8f0; margin: 1rem 0 1.5rem; line-height: 1.6; }
+    code { font-family: 'JetBrains Mono', monospace; color: #34d399; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.88rem; }
+    .demo-output { background: rgba(15, 23, 42, 0.9); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; border-radius: 0 0.75rem 0.75rem 0; margin-bottom: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #a7f3d0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 2.1rem; } }
+    .table-custom { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    .table-custom th, .table-custom td { padding: 0.75rem 1rem; border: 1px solid var(--border-card); text-align: left; }
+    .table-custom th { background: rgba(16, 185, 129, 0.1); color: #34d399; font-weight: 600; }
+    .table-custom td { color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="navbar">
+      <a class="brand" href="../index.html"><i class="fa-solid fa-database"></i> PHP Mastery &bull; Chapter 5</a>
+      <a class="nav-link" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Hub Gateway</a>
+    </header>
 
+    <div class="chapter-header">
+      <div class="badge"><i class="fa-solid fa-server"></i> Module 05</div>
+      <h1>MySQL &amp; Database Engineering</h1>
+      <p class="lead">From Fundamental SQL Queries to High-Performance PDO &amp; MySQLi Prepared Statements, Transactions, and Anti-SQL Injection Defense.</p>
+    </div>
 
-MySQL data types
+    <!-- Section 1: Overview & Architecture -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-diagram-project"></i> 1. Relational Database Architecture in PHP</h2>
+      <p>PHP communicates with relational databases through two primary modern drivers:</p>
+      <ul>
+        <li><strong>MySQLi (MySQL Improved)</strong>: Specific to MySQL/MariaDB. Supports both procedural and object-oriented paradigms, prepared statements, and multiple query execution.</li>
+        <li><strong>PDO (PHP Data Objects)</strong>: Database-agnostic abstraction layer. Allows switching between MySQL, PostgreSQL, SQLite, Oracle, and MS SQL with consistent API methods.</li>
+      </ul>
 
-List two database operations. 
-1. mysqli_connect() 
-2. mysqli_close($conn)  
-3. mysqli_fetch_array() 
-mysqli_fetch_row()
-4.mysqli_fetch_assoc() 
-5.mysqli_num_rows($result)
-6.mysqli_affected_rows()  
-7. mysqli_error() 
-8.mysqli_connect_error()
-9.mysqli_query($conn, $sql)
-10.mysqli_multi_query($conn,$sql);
-11.die("Connection failed : ".mysqli_connect_error());
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>PDO</th>
+            <th>MySQLi (Object-Oriented)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Database Support</td>
+            <td>12+ DBMS (MySQL, Postgres, SQLite, etc.)</td>
+            <td>MySQL / MariaDB only</td>
+          </tr>
+          <tr>
+            <td>Prepared Statements</td>
+            <td>Named (<code>:param</code>) and Positional (<code>?</code>)</td>
+            <td>Positional (<code>?</code>) only</td>
+          </tr>
+          <tr>
+            <td>Performance</td>
+            <td>High</td>
+            <td>High (Slightly faster for MySQL-specific ops)</td>
+          </tr>
+          <tr>
+            <td>Transactions</td>
+            <td>Full support (<code>beginTransaction</code>, <code>commit</code>)</td>
+            <td>Full support (<code>begin_transaction</code>, <code>commit</code>)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
+    <!-- Section 2: MySQLi Connection & Prepared Statements -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-shield-halved"></i> 2. Secure MySQLi: Prepared Statements (Anti-SQL Injection)</h2>
+      <p>Never concatenate unsanitized user inputs into SQL strings. Always use parameterized prepared statements:</p>
 
+      <pre><code class="language-php">&lt;?php
+// 1. Establish Secure MySQLi Connection
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "university_db";
 
-Write steps to create database using PHP 
-Approcah1 : using PHP code to Creating database with CREATE DATABASE query 
-Step 1: Set variables with values for servername, username, password. 
-Step 2: Create connection object by passing servername, username, password as parameters. 
-Step 3: Create query object with the query as "CREATE DATABASE dbname"; 
-Step 4: Execute query with connection object. 
-Code - 
-<?php
-   $servername = "localhost";
-   $username = "root";
-   $password = "";
-   
-   $conn = mysqli_connect($servername, $username ,$password);
-   
-   if(!$conn){
-       die("Connection failed : ".mysqli_connect_error());
-   } else {
-       echo "<br> Connection Establised!";
-   }
-   
-   $sql = "CREATE DATABASE TestDB;";
-   
-   if(mysqli_query($conn,$sql)){
-       echo "<br> Database created successfully!";
-   } else {
-       die("Something went wrong : ".mysqli_error($conn));
-   } 
-?> 
+$conn = @new mysqli($host, $user, $pass, $db);
 
-
-
-mysqli_connect() - Establishes a connection to the MySQL server. 
-Syntax: mysqli_connect($host, $username, $password, $database) 
-Parameters: 
-$host (string) - The hostname of the MySQL server. 
-$username (string) - The username for the MySQL server. 
-$password (string) - The password for the MySQL server. 
-$database (string) - The name of the database to connect to. 
-Return type: mysqli - A new MySQLi connection object.
-Example:
-$host = 'localhost';
-$username = 'root';
-$password = 'password';
-$database = 'mydatabase';
-$conn = mysqli_connect($host, $username, $password, $database);
-
-
-mysqli_close($conn) - When the script ends, the connection with the database also closes. If you want to end the code manually, use 
-the mysqli_close function.
-Syntax: mysqli_close($conn) 
-Parameters: $conn (mysqli) - The MySQLi connection object. 
-Return type: void - No value is returned.
-Example:
-mysqli_close($conn);
-
-
-mysqli_fetch_array() - Fetches a result row as an associative array, a numeric array, or both.
-Syntax: mysqli_fetch_array($result, $resulttype) 
-Parameters: 
-$result (mysqli_result) - The result object. 
-$resulttype (integer) - The type of array to return. It can be MYSQLI_BOTH (default), MYSQLI_ASSOC, or MYSQLI_NUM. 
-Return type: array - An array containing the next result row.
-Example:
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-
-mysqli_fetch_assoc() - Fetches a result row as an associative array. 
-Syntax: mysqli_fetch_assoc($result)
-Parameters: $result (mysqli_result) - The result object. 
-Return type: array - An associative array containing the next result row.
-Example:
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
-
-
-mysqli_num_rows($result) 
-Syntax: mysqli_num_rows($result) 
-Parameters: $result (mysqli_result) - The result object. 
-Return type: integer - The number of rows in the result set.
-Example:
-$result = mysqli_query($conn, $sql);
-$num_rows = mysqli_num_rows($result);
-
-
-mysqli_affected_rows() 
-Syntax: mysqli_affected_rows($conn) 
-Parameters: $conn (mysqli) - The MySQLi connection object. 
-Return type: integer - The number of rows affected by the last INSERT, UPDATE, REPLACE or DELETE query.
-Example:
-$affected_rows = mysqli_affected_rows($conn);
-
-
-mysqli_error() 
-Syntax: mysqli_error($conn) 
-Parameters: $conn (mysqli) - The MySQLi connection object. 
-Return type: string - The last error message.
-Example:
-$error = mysqli_error($conn);
-
-mysqli_connect_error() 
-Syntax: mysqli_connect_error() 
-Parameters: None. 
-Return type: string - The last connection error message.
-Example:
-$connect_error = mysqli_connect_error();
-
-
-mysqli_query($conn, $sql) 
-Syntax: mysqli_query($conn, $sql) 
-Parameters: 
-$conn (mysqli) - The MySQLi connection object. 
-$sql (string) - The SQL query to execute. 
-Return type: mysqli_result - A result object.
-Example:
-$sql = "SELECT * FROM mytable";
-$result = mysqli_query($conn, $sql);
-
-
-mysqli_multi_query($conn,$sql); 
-Syntax: mysqli_multi_query($conn,$sql) 
-Parameters: 
-$conn (mysqli) - The MySQLi connection object. 
-$sql (string) - The SQL query to execute. 
-Return type: boolean - TRUE on success or FALSE on failure.
-Example:
-$sql = "SELECT * FROM mytable; SELECT * FROM mytable2";
-mysqli_multi_query($conn,$sql);
-
-
-die("Connection failed : ".mysqli_connect_error()); 
-Syntax: die("Connection failed : ".mysqli_connect_error()) 
-Parameters: None. 
-Return type: void - Terminates the script and prints the connection error message.
-Example:
-if (!$conn) {
-    die("Connection failed : ". mysqli_connect_error());
+if ($conn->connect_error) {
+    // In production, log error privately and display generic message
+    error_log("Connection failed: " . $conn->connect_error);
+    $connectionStatus = "DB offline (Simulation Active)";
+} else {
+    $connectionStatus = "Connected successfully to MySQL!";
 }
 
+// 2. Secure Prepared Statement (INSERT)
+$stmt = $conn->prepare("INSERT INTO students (name, email, roll_no, gpa) VALUES (?, ?, ?, ?)");
+if ($stmt) {
+    $name = "Alex Johnson";
+    $email = "alex@example.com";
+    $rollNo = 1856;
+    $gpa = 3.92;
 
+    // 'sssi' -> string, string, integer, double
+    $stmt->bind_param("ssid", $name, $email, $rollNo, $gpa);
+    // $stmt->execute();
+    $stmt->close();
+}
+?&gt;</code></pre>
+
+      <div class="demo-output">
+        <?php
+          echo "<strong>Runtime Output:</strong> MySQLi Driver Configured &bull; Prepared Statements Ready &bull; Status: Simulated Safe Mode";
+        ?>
+      </div>
+    </div>
+
+    <!-- Section 3: PDO Enterprise Pattern -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-layer-group"></i> 3. Enterprise PDO Pattern with Exception Handling</h2>
+      <p>The standard industry approach for scalable web services:</p>
+
+      <pre><code class="language-php">&lt;?php
+class Database {
+    private static ?PDO $instance = null;
+
+    public static function getConnection(): PDO {
+        if (self::$instance === null) {
+            $dsn = "mysql:host=localhost;dbname=store_db;charset=utf8mb4";
+            $options = [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ];
+            
+            try {
+                self::$instance = new PDO($dsn, "root", "", $options);
+            } catch (PDOException $e) {
+                // Secure error handling
+                throw new RuntimeException("Database connection failure: " . $e->getMessage());
+            }
+        }
+        return self::$instance;
+    }
+}
+
+// Named Parameters Query Example:
+/*
+$pdo = Database::getConnection();
+$stmt = $pdo->prepare("SELECT id, name, price FROM products WHERE category = :cat AND price <= :maxPrice");
+$stmt->execute([
+    ':cat'      => 'Electronics',
+    ':maxPrice' => 999.99
+]);
+$products = $stmt->fetchAll();
+*/
+?&gt;</code></pre>
+    </div>
+
+    <!-- Section 4: Transactions (ACID Compliance) -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-money-bill-transfer"></i> 4. ACID Transactions (Bank / Order Processing)</h2>
+      <p>When multiple database updates must succeed together or fail completely (e.g., wallet transfers, checkout carts):</p>
+
+      <pre><code class="language-php">&lt;?php
+function transferFunds(PDO $pdo, int $fromAccount, int $toAccount, float $amount): bool {
+    try {
+        $pdo->beginTransaction();
+
+        // 1. Deduct from sender
+        $stmt1 = $pdo->prepare("UPDATE accounts SET balance = balance - :amount WHERE id = :id AND balance >= :amount");
+        $stmt1->execute([':amount' => $amount, ':id' => $fromAccount]);
+        if ($stmt1->rowCount() === 0) {
+            throw new Exception("Insufficient funds or sender not found.");
+        }
+
+        // 2. Credit receiver
+        $stmt2 = $pdo->prepare("UPDATE accounts SET balance = balance + :amount WHERE id = :id");
+        $stmt2->execute([':amount' => $amount, ':id' => $toAccount]);
+
+        // Commit transaction
+        $pdo->commit();
+        return true;
+    } catch (Exception $e) {
+        // Rollback all changes on error
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        error_log("Transaction failed: " . $e->getMessage());
+        return false;
+    }
+}
+?&gt;</code></pre>
+    </div>
+
+    <!-- Section 5: Essential SQL Reference Sheet -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-file-lines"></i> 5. Complete DDL &amp; DML Syntax Reference Sheet</h2>
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>SQL Command</th>
+            <th>Type</th>
+            <th>Description &amp; Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>CREATE DATABASE</code></td>
+            <td>DDL</td>
+            <td><code>CREATE DATABASE store_db CHARACTER SET utf8mb4;</code></td>
+          </tr>
+          <tr>
+            <td><code>CREATE TABLE</code></td>
+            <td>DDL</td>
+            <td><code>CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, email VARCHAR(120) UNIQUE, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);</code></td>
+          </tr>
+          <tr>
+            <td><code>INSERT INTO</code></td>
+            <td>DML</td>
+            <td><code>INSERT INTO users (email) VALUES ('user@example.com');</code></td>
+          </tr>
+          <tr>
+            <td><code>SELECT ... WHERE</code></td>
+            <td>DQL</td>
+            <td><code>SELECT * FROM users WHERE id = 1 LIMIT 1;</code></td>
+          </tr>
+          <tr>
+            <td><code>UPDATE ... SET</code></td>
+            <td>DML</td>
+            <td><code>UPDATE users SET status = 'active' WHERE id = 1;</code></td>
+          </tr>
+          <tr>
+            <td><code>DELETE FROM</code></td>
+            <td>DML</td>
+            <td><code>DELETE FROM users WHERE id = 1;</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

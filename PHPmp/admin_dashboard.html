@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Portal | Executive Admin Control Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-card-hover: rgba(99, 102, 241, 0.4);
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+    .header { background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-card); padding: 1.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+    .brand i { color: var(--primary); }
+    .nav-actions { display: flex; align-items: center; gap: 1.25rem; }
+    .admin-badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); padding: 0.5rem 1rem; border-radius: 9999px; color: #a5b4fc; font-weight: 600; font-size: 0.9rem; }
+    .btn-logout { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s ease; }
+    .btn-logout:hover { color: #f87171; }
+    .main-wrap { max-width: 1200px; width: 100%; margin: 0 auto; padding: 2.5rem 1.5rem; flex: 1; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+    .metric-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-card); border-radius: 1.25rem; padding: 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
+    .metric-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .icon-sales { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .icon-orders { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+    .icon-users { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .icon-stock { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
+    .metric-val { font-family: 'Outfit', sans-serif; font-size: 1.75rem; font-weight: 700; color: #fff; }
+    .metric-title { font-size: 0.85rem; color: var(--text-muted); }
+    .content-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-card); border-radius: 1.25rem; padding: 1.75rem; margin-bottom: 2rem; }
+    .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+    .content-title { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .table-responsive { overflow-x: auto; }
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .admin-table th, .admin-table td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: left; }
+    .admin-table th { background: rgba(255, 255, 255, 0.02); color: #cbd5e1; font-weight: 600; }
+    .status-badge { padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .status-delivered { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .status-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .status-shipped { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="admin_dashboard.html">
+      <i class="fa-solid fa-shield-halved"></i> Admin Control Center
+    </a>
+    <div class="nav-actions">
+      <div class="admin-badge">
+        <i class="fa-solid fa-crown"></i> Superadmin Mode
+      </div>
+      <a href="dashboard.html" class="btn-logout">
+        <i class="fa-solid fa-bag-shopping"></i> Store View
+      </a>
+      <a href="index.html" class="btn-logout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+      </a>
+      <a href="../index.html" class="btn-logout">
+        <i class="fa-solid fa-arrow-left"></i> Hub Gateway
+      </a>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon icon-sales"><i class="fa-solid fa-dollar-sign"></i></div>
+        <div>
+          <div class="metric-val">$48,290</div>
+          <div class="metric-title">Monthly Revenue</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon icon-orders"><i class="fa-solid fa-box-open"></i></div>
+        <div>
+          <div class="metric-val">1,248</div>
+          <div class="metric-title">Completed Orders</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon icon-users"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div class="metric-val">3,892</div>
+          <div class="metric-title">Registered Accounts</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon icon-stock"><i class="fa-solid fa-cubes-stacked"></i></div>
+        <div>
+          <div class="metric-val">98.4%</div>
+          <div class="metric-title">Inventory Health</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Orders Table -->
+    <div class="content-card">
+      <div class="content-header">
+        <h3 class="content-title"><i class="fa-solid fa-receipt"></i> Recent Orders Overview</h3>
+        <button style="padding: 0.4rem 0.85rem; background: rgba(255,255,255,0.06); border: 1px solid var(--border-card); border-radius: 8px; color: #fff; font-size: 0.85rem; cursor: pointer;" onclick="alert('Exporting order manifest to CSV...')"><i class="fa-solid fa-download"></i> Export CSV</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Item Ordered</th>
+              <th>Amount</th>
+              <th>Payment</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>#ORD-9021</code></td>
+              <td>Sarah Connor</td>
+              <td>Developer Ultrabook Pro</td>
+              <td>$1,499.00</td>
+              <td>Stripe &bull; Card</td>
+              <td><span class="status-badge status-delivered">Delivered</span></td>
+            </tr>
+            <tr>
+              <td><code>#ORD-9022</code></td>
+              <td>Alex Taylor</td>
+              <td>Studio ANC Headphones</td>
+              <td>$249.00</td>
+              <td>PayPal Express</td>
+              <td><span class="status-badge status-shipped">In Transit</span></td>
+            </tr>
+            <tr>
+              <td><code>#ORD-9023</code></td>
+              <td>Ethan Hunt</td>
+              <td>Mechanical RGB Keyboard</td>
+              <td>$129.00</td>
+              <td>Credit Card</td>
+              <td><span class="status-badge status-pending">Processing</span></td>
+            </tr>
+            <tr>
+              <td><code>#ORD-9024</code></td>
+              <td>Elena Vance</td>
+              <td>Pro Gaming Smartphone</td>
+              <td>$799.00</td>
+              <td>Apple Pay</td>
+              <td><span class="status-badge status-delivered">Delivered</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2024-2026 Shopping Portal Module &bull; MSBTE Web-Based Programming
+  </footer>
+</body>
+</html>

@@ -112,38 +112,26 @@ The [`Practicals/`](Practicals/) directory contains the core laboratory assignme
 
 ---
 
-### 📚 PHP Textbook Chapter Modules
-
-The [`PHP_Book/`](PHP_Book/) directory contains detailed conceptual modules:
-
 - **[Chapter 1: PHP Basics & Control Structures](PHP_Book/chapter1.php)**: Data types, operator taxonomy, date functions, matrix tables, and mathematical sequences.
 - **[Chapter 2: Array Operations & Built-ins](PHP_Book/chapter2.php)**: Associative arrays, `extract()`, `compact()`, `explode()`, `implode()`, and array pointers.
 - **[Chapter 3: Object-Oriented PHP](PHP_Book/chapter3.php)**: Classes, constructors, method overrides, and data encapsulation.
 - **[Chapter 4: Advanced Web Programming](PHP_Book/chapter4.php)**: GD graphic rendering, file handling, session lifecycle, and IMAP processing.
-- **[Chapter 5: Database Engineering](PHP_Book/chapter5.php)**: Comprehensive MySQLi reference guide, database schema scripts, and CRUD query syntax.
+- **[Chapter 5: Database Engineering & PDO](PHP_Book/chapter5.php)**: Comprehensive MySQLi and PDO reference guide, database schema scripts, prepared statements, and ACID transactions.
+- **[Chapter 6: Modern PHP 8.x Architecture](PHP_Book/chapter6.php)**: Constructor property promotion, `match` expressions, Backed Enums, nullsafe operator `?->`, union types, and memory-efficient `yield` generators.
+- **[Chapter 7: Enterprise Security & Auth](PHP_Book/chapter7.php)**: Argon2id/Bcrypt password hashing, timing-safe tokens, anti-CSRF generation, anti-XSS context escaping, and hardened session cookies.
+- **[Chapter 8: RESTful APIs & Microservices](PHP_Book/chapter8.php)**: Pure JSON API controller architecture, HTTP status code specifications, JWT tokens, and cURL external clients.
 - **[Demo Form Handler](PHP_Book/demoHTML.html)** &bull; **[Live Form Demo](https://ken-kanike.github.io/WBP-Coding/PHP_Book/demoHTML.html)**: Interactive demonstration of POST parameter dispatch to [`demoServer.php`](PHP_Book/demoServer.php).
 
 ---
 
-### 🗄️ MySQL Database Operations
+### 🛍️ Shopping Portal Mini-Project (Unlocked Direct Access)
 
-The [`database codes/`](database%20codes/) folder provides standalone SQL / MySQLi operation scripts:
+Located in [`PHPmp/`](PHPmp/), this module delivers an e-commerce authentication and dashboard suite with **zero password barriers**:
 
-- [`createdb.php`](database%20codes/createdb.php) &bull; Automated database provisioning
-- [`createTable.php`](database%20codes/createTable.php) &bull; Schema creation with primary key constraints
-- [`insertData1.php`](database%20codes/insertData1.php) / [`insertData2.php`](database%20codes/insertData2.php) &bull; Single and batch record insertion
-- [`fetchData.php`](database%20codes/fetchData.php) &bull; Formatted HTML table result set query
-- [`updateData.php`](database%20codes/updateData.php) &bull; Record updates with WHERE clauses
-- [`deleteData.php`](database%20codes/deleteData.php) &bull; Safe record removal
-
----
-
-### 🛍️ Shopping Portal Mini-Project
-
-Located in [`PHPmp/`](PHPmp/), this module delivers an e-commerce authentication frontend:
-
-- **User Authentication**: [`login.html`](PHPmp/login.html) &bull; [Live Preview](https://ken-kanike.github.io/WBP-Coding/PHPmp/login.html) &bull; [`login.php`](PHPmp/login.php)
-- **Admin Control Gateway**: [`index.html`](PHPmp/index.html) &bull; [Live Preview](https://ken-kanike.github.io/WBP-Coding/PHPmp/index.html) &bull; [`index.php`](PHPmp/index.php)
+- **Storefront User Dashboard (Direct)**: [`dashboard.html`](PHPmp/dashboard.html) &bull; [Live Demo](https://ken-kanike.github.io/WBP-Coding/PHPmp/dashboard.html)
+- **Admin Control Center (Direct)**: [`admin_dashboard.html`](PHPmp/admin_dashboard.html) &bull; [Live Demo](https://ken-kanike.github.io/WBP-Coding/PHPmp/admin_dashboard.html)
+- **User Authentication Gateway**: [`login.html`](PHPmp/login.html) &bull; [Live Demo](https://ken-kanike.github.io/WBP-Coding/PHPmp/login.html) &bull; [`login.php`](PHPmp/login.php)
+- **Admin Login Gateway**: [`index.html`](PHPmp/index.html) &bull; [Live Demo](https://ken-kanike.github.io/WBP-Coding/PHPmp/index.html) &bull; [`index.php`](PHPmp/index.php)
 
 ---
 

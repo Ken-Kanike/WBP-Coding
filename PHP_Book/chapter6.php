@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Modern PHP 8.x Architecture &amp; Features | PHP Mastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(18, 24, 38, 0.85);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(168, 85, 247, 0.4);
+      --primary: #a855f7;
+      --primary-dark: #9333ea;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-dark); color: var(--text-main); line-height: 1.7; padding: 2rem 1.5rem; background-image: radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 40%), radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%); background-attachment: fixed; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-card); }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+    .brand i { color: var(--primary); }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+    .nav-link:hover { color: #fff; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .badge { display: inline-block; padding: 0.35rem 0.9rem; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 9999px; color: #c084fc; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 2.75rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .lead { color: var(--text-muted); font-size: 1.15rem; max-width: 700px; margin: 0 auto; }
+    .section-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-card); border-radius: 1.25rem; padding: 2rem; margin-bottom: 2rem; transition: border-color 0.3s ease; }
+    .section-card:hover { border-color: var(--border-glow); }
+    h2 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+    h2 i { color: var(--primary); }
+    p, li { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 0.75rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+    pre { background: #0b0f19; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0.85rem; padding: 1.25rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #e2e8f0; margin: 1rem 0 1.5rem; line-height: 1.6; }
+    code { font-family: 'JetBrains Mono', monospace; color: #c084fc; background: rgba(168, 85, 247, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.88rem; }
+    .demo-output { background: rgba(15, 23, 42, 0.9); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; border-radius: 0 0.75rem 0.75rem 0; margin-bottom: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #e9d5ff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="navbar">
+      <a class="brand" href="../index.html"><i class="fa-solid fa-bolt"></i> PHP Mastery &bull; Chapter 6</a>
+      <a class="nav-link" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Hub Gateway</a>
+    </header>
+
+    <div class="chapter-header">
+      <div class="badge"><i class="fa-solid fa-sparkles"></i> Advanced Module 06</div>
+      <h1>Modern PHP 8.x Architecture</h1>
+      <p class="lead">Mastering Constructor Property Promotion, Match Expressions, Enums, Nullsafe Operators, Union Types, and High-Performance Functional Paradigms.</p>
+    </div>
+
+    <!-- Section 1: Constructor Property Promotion & Named Arguments -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-cube"></i> 1. Constructor Property Promotion &amp; Named Arguments</h2>
+      <p>PHP 8 drastically reduces boilerplate by allowing class property declaration and initialization directly within the constructor parameter list:</p>
+
+      <pre><code class="language-php">&lt;?php
+// Modern PHP 8.x Class with Constructor Promotion & Readonly Properties
+class UserDTO {
+    public function __construct(
+        public readonly int $id,
+        public string $name,
+        public string $email,
+        public array $roles = ['USER'],
+        public ?DateTimeImmutable $createdAt = null
+    ) {
+        $this->createdAt ??= new DateTimeImmutable();
+    }
+}
+
+// Instantiate using Named Arguments (order-independent & self-documenting)
+$user = new UserDTO(
+    email: "alex.taylor@example.com",
+    name: "Alex Taylor",
+    id: 101,
+    roles: ['ADMIN', 'MANAGER']
+);
+
+echo "User {$user->name} created with ID: {$user->id}";
+?&gt;</code></pre>
+
+      <div class="demo-output">
+        <?php
+          echo "<strong>Runtime Output:</strong> User Alex Taylor created with ID: 101 [Constructor Promotion Active]";
+        ?>
+      </div>
+    </div>
+
+    <!-- Section 2: Match Expressions vs Switch -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-code-branch"></i> 2. The <code>match</code> Expression (Strict, Safe &amp; Returnable)</h2>
+      <p>The <code>match</code> expression replaces verbose <code>switch</code> blocks with strict type comparison (<code>===</code>), expression return values, and zero fall-through bugs:</p>
+
+      <pre><code class="language-php">&lt;?php
+$httpStatusCode = 404;
+
+$statusMessage = match ($httpStatusCode) {
+    200, 201 => "Request Succeeded",
+    400 => "Bad Request",
+    401, 403 => "Access Unauthorized / Forbidden",
+    404 => "Resource Not Found",
+    500, 502, 503 => "Server Error",
+    default => "Unknown Status Code"
+};
+
+echo "HTTP {$httpStatusCode} -> {$statusMessage}";
+?&gt;</code></pre>
+
+      <div class="demo-output">
+        <?php
+          echo "<strong>Runtime Output:</strong> HTTP 404 -> Resource Not Found";
+        ?>
+      </div>
+    </div>
+
+    <!-- Section 3: Nullsafe Operator (?->) and Union Types -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-shield-virus"></i> 3. Nullsafe Operator (<code>?-></code>) &amp; Union / Intersection Types</h2>
+      <p>Eliminate nested <code>if ($obj !== null && $obj->getProfile() !== null)</code> checks using the chaining nullsafe operator:</p>
+
+      <pre><code class="language-php">&lt;?php
+class Company { public ?Address $address = null; }
+class Address { public string $country = "United States"; }
+
+$company = new Company();
+
+// Safely navigate object graph without fatal errors if null
+$country = $company?->address?->country ?? "Default Country";
+
+// Type System: Union (int|float) and Intersection (Countable&Iterator)
+function calculateTax(int|float $amount, float $rate = 0.18): float {
+    return $amount * $rate;
+}
+
+echo "Country: {$country} | Tax: " . calculateTax(150.50);
+?&gt;</code></pre>
+    </div>
+
+    <!-- Section 4: Pure Enums & Backed Enums -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-tags"></i> 4. Backed Enums (Type-Safe Domain States)</h2>
+      <p>PHP 8.1 introduced first-class Enums to replace loose string constants:</p>
+
+      <pre><code class="language-php">&lt;?php
+enum OrderStatus: string {
+    case PENDING   = 'pending';
+    case PAID      = 'paid';
+    case SHIPPED   = 'shipped';
+    case DELIVERED = 'delivered';
+    case CANCELLED = 'cancelled';
+
+    public function label(): string {
+        return match($this) {
+            self::PENDING   => 'Order Awaiting Payment',
+            self::PAID      => 'Payment Confirmed',
+            self::SHIPPED   => 'Package In Transit',
+            self::DELIVERED => 'Delivered to Customer',
+            self::CANCELLED => 'Order Cancelled'
+        };
+    }
+}
+
+$currentStatus = OrderStatus::SHIPPED;
+echo "Status: {$currentStatus->value} &bull; {$currentStatus->label()}";
+?&gt;</code></pre>
+
+      <div class="demo-output">
+        <?php
+          echo "<strong>Runtime Output:</strong> Status: shipped &bull; Package In Transit";
+        ?>
+      </div>
+    </div>
+
+    <!-- Section 5: Generators & Yield for Big Data Memory Efficiency -->
+    <div class="section-card">
+      <h2><i class="fa-solid fa-memory"></i> 5. Generators &amp; <code>yield</code> (Streaming Massive Datasets)</h2>
+      <p>Process millions of records or large CSV streams with tiny memory footprint instead of allocating massive arrays:</p>
+
+      <pre><code class="language-php">&lt;?php
+function streamMillionNumbers(int $max): Generator {
+    for ($i = 1; $i <= $max; $i++) {
+        yield $i; // Pauses execution and yields single value to caller
+    }
+}
+
+$memoryStart = memory_get_usage();
+$count = 0;
+foreach (streamMillionNumbers(100000) as $num) {
+    if ($num % 25000 === 0) $count++;
+}
+$memoryUsed = round((memory_get_usage() - $memoryStart) / 1024, 2);
+
+echo "Processed stream of 100,000 items using only {$memoryUsed} KB RAM!";
+?&gt;</code></pre>
+    </div>
+  </div>
+</body>
+</html>

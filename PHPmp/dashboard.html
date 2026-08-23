@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Portal | User Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-card-hover: rgba(6, 182, 212, 0.4);
+      --primary: #06b6d4;
+      --primary-dark: #0891b2;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+    .header { background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-card); padding: 1.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+    .brand i { color: var(--primary); }
+    .nav-actions { display: flex; align-items: center; gap: 1.25rem; }
+    .cart-badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.3); padding: 0.5rem 1rem; border-radius: 9999px; color: #22d3ee; font-weight: 600; font-size: 0.9rem; }
+    .btn-logout { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s ease; }
+    .btn-logout:hover { color: #f87171; }
+    .main-wrap { max-width: 1200px; width: 100%; margin: 0 auto; padding: 2.5rem 1.5rem; flex: 1; }
+    .welcome-banner { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(99, 102, 241, 0.15)); border: 1px solid var(--border-card); border-radius: 1.25rem; padding: 2rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .welcome-banner h2 { font-family: 'Outfit', sans-serif; font-size: 1.75rem; margin-bottom: 0.3rem; }
+    .welcome-banner p { color: var(--text-muted); font-size: 0.95rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; }
+    .product-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-card); border-radius: 1.25rem; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease; }
+    .product-card:hover { border-color: var(--border-card-hover); transform: translateY(-4px); }
+    .product-img { width: 100%; height: 170px; object-fit: cover; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--primary); }
+    .product-info { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .product-title { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .product-desc { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .product-price { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; color: #38bdf8; margin-bottom: 1rem; }
+    .btn-add-cart { width: 100%; padding: 0.75rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 0.75rem; color: #fff; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.2s ease; }
+    .btn-add-cart:hover { filter: brightness(1.1); }
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="dashboard.html">
+      <i class="fa-solid fa-bag-shopping"></i> Shopping Portal
+    </a>
+    <div class="nav-actions">
+      <div class="cart-badge">
+        <i class="fa-solid fa-cart-shopping"></i> Cart: <span id="cartCount">0</span> Items
+      </div>
+      <a href="login.html" class="btn-logout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+      </a>
+      <a href="../index.html" class="btn-logout">
+        <i class="fa-solid fa-arrow-left"></i> Hub Gateway
+      </a>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+    <div class="welcome-banner">
+      <div>
+        <h2>Welcome to the Shopping Dashboard, Alex!</h2>
+        <p>Unlocked direct demo mode &bull; Browse products, manage cart, and simulate orders with zero authentication friction.</p>
+      </div>
+      <a href="admin_dashboard.html" style="padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.08); border: 1px solid var(--border-card); border-radius: 0.75rem; color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fa-solid fa-shield-halved"></i> Switch to Admin View
+      </a>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img"><i class="fa-solid fa-laptop-code"></i></div>
+        <div class="product-info">
+          <h3 class="product-title">Developer Ultrabook Pro</h3>
+          <p class="product-desc">High-performance 14-core workstation laptop with 32GB RAM &amp; 1TB NVMe SSD.</p>
+          <div class="product-price">$1,499.00</div>
+          <button class="btn-add-cart" onclick="addToCart('Developer Ultrabook Pro')"><i class="fa-solid fa-plus"></i> Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><i class="fa-solid fa-headphones"></i></div>
+        <div class="product-info">
+          <h3 class="product-title">Studio ANC Headphones</h3>
+          <p class="product-desc">Wireless active noise-cancelling headphones with 40-hour continuous battery life.</p>
+          <div class="product-price">$249.00</div>
+          <button class="btn-add-cart" onclick="addToCart('Studio ANC Headphones')"><i class="fa-solid fa-plus"></i> Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><i class="fa-solid fa-keyboard"></i></div>
+        <div class="product-info">
+          <h3 class="product-title">Mechanical RGB Keyboard</h3>
+          <p class="product-desc">Custom hot-swappable mechanical switches with aluminum chassis &amp; south-facing LEDs.</p>
+          <div class="product-price">$129.00</div>
+          <button class="btn-add-cart" onclick="addToCart('Mechanical RGB Keyboard')"><i class="fa-solid fa-plus"></i> Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <div class="product-info">
+          <h3 class="product-title">Pro Gaming Smartphone</h3>
+          <p class="product-desc">AMOLED 144Hz display, Snapdragon 8 Gen 3, and liquid cooling chamber.</p>
+          <div class="product-price">$799.00</div>
+          <button class="btn-add-cart" onclick="addToCart('Pro Gaming Smartphone')"><i class="fa-solid fa-plus"></i> Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2024-2026 Shopping Portal Module &bull; MSBTE Web-Based Programming
+  </footer>
+
+  <script>
+    let cart = 0;
+    function addToCart(name) {
+      cart++;
+      document.getElementById('cartCount').innerText = cart;
+      alert(`"${name}" added to shopping cart! Total items: ${cart}`);
+    }
+  </script>
+</body>
+</html>
